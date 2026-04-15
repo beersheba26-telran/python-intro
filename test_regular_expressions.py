@@ -3,7 +3,7 @@ from unittest import TestCase
 import re
 class TestRegEx(TestCase):
     def test_pythonic_name_true(self):
-        pythonicNameRX = ipV4addressRX
+        pythonicNameRX = regex.pythonicNameRegx()
         self.assertTrue(re.fullmatch(pythonicNameRX,"__"))
         self.assertTrue(re.fullmatch(pythonicNameRX,"abc"))
         self.assertTrue(re.fullmatch(pythonicNameRX,"d1"))
@@ -11,7 +11,7 @@ class TestRegEx(TestCase):
         self.assertTrue(re.fullmatch(pythonicNameRX,"_123"))
         self.assertTrue(re.fullmatch(pythonicNameRX,"B1"))
     def  test_pythonic_name_false(self): 
-        pythonicNameRX = ipV4addressRX 
+        pythonicNameRX = regex.pythonicNameRegx() 
         self.assertFalse(re.fullmatch(pythonicNameRX, " _")) 
         self.assertFalse(re.fullmatch(pythonicNameRX, "1ax")) 
         self.assertFalse(re.fullmatch(pythonicNameRX, "a-f")) 
