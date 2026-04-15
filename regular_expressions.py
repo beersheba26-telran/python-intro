@@ -23,8 +23,8 @@ def ip_octet():
     '''
     return matching pattern for IP octet (number with optional leading zeros from 0 to 255)
     '''
-    # return r"\d{1,2}|[01]\d\d|2[0-4]\d|25[0-5]"
-    return r"(?:\d{1,2}|[01]\d\d|2[0-4]\d|25[0-5])"
+    return r"(\d{1,2}|[01]\d\d|2[0-4]\d|25[0-5])"
+    # return r"(?:\d{1,2}|[01]\d\d|2[0-4]\d|25[0-5])"
 
 def ipV4AddressRegex()->str:
     """returns regexp as match pattern of IPv4 address
