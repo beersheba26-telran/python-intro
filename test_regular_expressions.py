@@ -71,7 +71,7 @@ class TestRegEx(TestCase):
         self.assertFalse(re.fullmatch(ipOctetRX, "0010"))
     def test_ipV4_true(self) :
         ipV4addressRX = regex.ipV4AddressRegex()
-        self.assertTrue(re.fullmatch(ipV4addressRX, "0.0.0.0")) 
+        self.assertTrue(re.fullmatch(ipV4addressRX, "0.0.0.0"))
         self.assertTrue(re.fullmatch(ipV4addressRX, "0.01.002.000")) 
         self.assertTrue(re.fullmatch(ipV4addressRX, "000.1.249.59")) 
         self.assertTrue(re.fullmatch(ipV4addressRX, "250.255.199.9"))

@@ -23,13 +23,18 @@ def ip_octet():
     '''
     return matching pattern for IP octet (number with optional leading zeros from 0 to 255)
     '''
-    return r"\d{1,2}|[01]\d\d|2[0-4]\d|25[0-5]"
+    # return r"\d{1,2}|[01]\d\d|2[0-4]\d|25[0-5]"
+    return r"(?:\d{1,2}|[01]\d\d|2[0-4]\d|25[0-5])"
+
 def ipV4AddressRegex()->str:
     """returns regexp as match pattern of IPv4 address
        comprises of 4 octets separated by dot
        each octet contains 1-3 symbols from 0 to 255
-    """ 
-   #TODO  
+    """
+    ip_1pattern = ip_octet()
+    # return rf'{ip_1pattern}\.{ip_1pattern}\.{ip_1pattern}\.{ip_1pattern}'
+    return rf'(?:{ip_1pattern}\.){{3}}{ip_1pattern}'
+
 def  mobileIsraelNumberRegex()->str:
     """returns regexp for mobile phone Israel number
        +972- - Israel preffix (not mandatary)
