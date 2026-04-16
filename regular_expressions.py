@@ -30,7 +30,7 @@ def ipV4AddressRegex()->str:
        each octet contains 1-3 symbols from 0 to 255
     """ 
     ipOctet = ip_octet()
-    return rf"(?:{ipOctet})\.(?:{ipOctet})\.(?:{ipOctet})\.(?:{ipOctet})"
+    return rf"({ipOctet})\.({ipOctet})\.({ipOctet})\.({ipOctet})"
 def  mobileIsraelNumberRegex()->str:
     """returns regexp for mobile phone Israel number
        +972- - Israel preffix (not mandatary)
