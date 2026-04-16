@@ -33,7 +33,7 @@ def ipV4AddressRegex()->str:
     """
     ip_1pattern = ip_octet()
     # return rf'{ip_1pattern}\.{ip_1pattern}\.{ip_1pattern}\.{ip_1pattern}'
-    return rf'(?:{ip_1pattern}\.){{3}}{ip_1pattern}'
+    return rf'({ip_1pattern}\.){{3}}{ip_1pattern}'
 
 def  mobileIsraelNumberRegex()->str:
     """returns regexp for mobile phone Israel number
