@@ -101,7 +101,8 @@ class TestRegEx(TestCase):
         self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "+972-54123456"))
         self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "059123-45-677")) 
         self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "054-1-2-3-45-67"))
-        self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "0571-23-45-6-7"))     
+        self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "0571-23-45-6-7"))
+        self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "054-1-23-4567"))     
              
         
                
