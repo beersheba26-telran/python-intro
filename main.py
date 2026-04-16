@@ -18,3 +18,6 @@ backupIndex = text.index("Backup")
 matchObj2 = ip_pattern.search(text, backupIndex)
 if matchObj2 is not None:
     print(f"DB Backup server IP is: {matchObj2.group()}")
+
+matches = ip_pattern.findall(text)
+print(matches)
