@@ -52,5 +52,23 @@ def passwordRegex ():
     At least 8 symbols
     '''
     return r"(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%&*!?.-])[\w@#$%&*!?.-]{8,}"
-    
+def operatorRegex(): 
+    return r"[+*/-]"
+def operandRegex():
+    return r"\d+"
+def arithmeticExprRegex():
+    operandRX = operandRegex()
+    operatorRx = operatorRegex()
+    return rf"({operandRX})(?:({operatorRx})({operandRX}))*"
+def openHtmlTagRegex():
+    return r"<[^/<>][^<>]+>"
+def closeHtmTagRegex():
+    return r"</[a-zA-Z]>"   
+def contentHtmlRegex():
+    return r"[^<>]+"
+def htmlElementRegex():
+    openTagRX = openHtmlTagRegex()
+    closeTagRX = closeHtmTagRegex()
+    contentRX = contentHtmlRegex()
+    return rf"({openTagRX})({contentRX})({closeTagRX})"
     
