@@ -37,8 +37,8 @@ def ipV4AddressRegex()->str:
 
 def  mobileIsraelNumberRegex()->str:
     """returns regexp for mobile phone Israel number
-       +972- - Israel preffix (not mandatary)
-       Operator preffix 0 (only without +972-)
+       +972- - Israel prefix (not mandatary)
+       Operator prefix 0 (only without +972-)
        50,51, 52, 53, 54, 55, 56, 57,58, 59
        optional dash
        7 digits as follows
@@ -46,7 +46,7 @@ def  mobileIsraelNumberRegex()->str:
        xxx-xx-xx
        x-xx-xx-xx
     """  
-    return r'^(?:\+972-(?:5\d)|0(?:5\d))-?(?:\d{7}|\d{3}-\d{2}-\d{2}|\d-\d{2}-\d{2}-\d{2})$'
+    return r'^(\+972-(5\d)|0(5\d))-?(\d{7}|\d{3}-\d{2}-\d{2}|\d-\d{2}-\d{2}-\d{2})$'
     
     
     
