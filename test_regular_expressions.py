@@ -1,6 +1,7 @@
 import regular_expressions as regex
 from unittest import TestCase
 import re
+passwordRX:re.Pattern = re.compile(regex.passwordRegex())
 class TestRegEx(TestCase):
     def test_pythonic_name_true(self):
         pythonicNameRX = regex.pythonicNameRegx()
@@ -102,7 +103,14 @@ class TestRegEx(TestCase):
         self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "059123-45-677")) 
         self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "054-1-2-3-45-67"))
         self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "0571-23-45-6-7"))
-        self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "054-1-23-4567"))     
+        self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "054-1-23-4567"))  
+    def test_password_true(self):
+        self.assertTrue(passwordRX.fullmatch("12345%COm."))
+    def test_password_false(self):
+        self.assertFalse(passwordRX.fullmatch("1aA."))
+        self.assertFalse(passwordRX.fullmatch("1aA111111111"))
+        self.assertFalse(passwordRX.fullmatch("12345.Com "))
+            
              
         
                

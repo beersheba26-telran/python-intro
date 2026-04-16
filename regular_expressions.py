@@ -43,6 +43,14 @@ def  mobileIsraelNumberRegex()->str:
        x-xx-xx-xx
     """  
     return r"(\+972-?|0)5\d-?(\d{7}|\d{3}-\d{2}-\d{2}|\d-\d{2}-\d{2}-\d{2})"   
-    
+def passwordRegex ():
+    '''
+    At least one uppercase letter,
+    At least one lowercase letter,
+    At least one digit,
+    At least one symbol from @#$%&*!?.-
+    At least 8 symbols
+    '''
+    return r"(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%&*!?.-])[\w@#$%&*!?.-]{8,}"
     
     
