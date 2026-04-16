@@ -32,8 +32,8 @@ def ipV4AddressRegex()->str:
        each octet contains 1-3 symbols from 0 to 255
     """
     ip_1pattern = ip_octet()
-    # return rf'{ip_1pattern}\.{ip_1pattern}\.{ip_1pattern}\.{ip_1pattern}'
-    return rf'({ip_1pattern}\.){{3}}{ip_1pattern}'
+    return rf'(?:{ip_1pattern})\.(?:{ip_1pattern})\.(?:{ip_1pattern})\.(?:{ip_1pattern})'
+    # return rf'(?:{ip_1pattern}\.){{3}}(?:{ip_1pattern})'
 
 def  mobileIsraelNumberRegex()->str:
     """returns regexp for mobile phone Israel number
