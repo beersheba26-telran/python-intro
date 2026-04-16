@@ -48,5 +48,42 @@ def  mobileIsraelNumberRegex()->str:
     """  
     return r'(\+972-(5\d)|0(5\d))-?(\d{7}|\d{3}-\d{2}-\d{2}|\d-\d{2}-\d{2}-\d{2})'
     
-    
-    
+def numberTrailingDollar()->str:
+    """returns regexp for number with trailing dollar sign
+       number may contain digits and optional dot as decimal separator
+       dot cannot be first symbol
+       dot cannot be last symbol
+       dot cannot be followed by another dot
+    """
+    return r"\d+(?:\.\d+)?\$"
+
+def passwordRegex()->str:
+    """Returns regexp for password.
+       password must be at least 8 characters long
+       password must contain at least one uppercase letter
+       password must contain at least one lowercase letter
+       password must contain at least one digit
+       password must contain at least one special character from the set !@#$%^&*()
+    """
+    # return r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$'
+    return "(?=.([A-Z])(?=.([A-Z])"
+
+def operatorRegex()->str:
+    """Returns regexp for operator.
+       operator must be one of the following: +, -, *, /
+    """
+    return r'[+\-*/]'
+
+def operandRegex():
+    """Returns regexp for operand.
+       operand must be a number (integer or decimal) or a variable name (Pythonic name)
+    """
+    return r'(\d+)'
+
+def arithmeticRegex():
+    """Returns regexp for arithmetic expression.
+       arithmetic expression must be in the form: operand operator operand
+       where operand is a number (integer or decimal) or a variable name (Pythonic name)
+       and operator is one of the following: +, -, *, /
+    """
+    return rf'{operandRegex()}\s*(?:{operatorRegex()}\s*{operandRegex()})*'

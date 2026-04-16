@@ -103,7 +103,12 @@ class TestRegEx(TestCase):
         self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "054-1-2-3-45-67"))
         self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "0571-23-45-6-7"))     
              
-        
+    def test_number_trailing_dollar_true(self):
+        numberTrailingDollarRX = regex.numberTrailingDollar()
+        self.assertTrue(re.fullmatch(numberTrailingDollarRX, "1$"))
+        self.assertTrue(re.fullmatch(numberTrailingDollarRX, "1.5$"))
+        self.assertTrue(re.fullmatch(numberTrailingDollarRX, "0.5$"))
+        self.assertTrue(re.fullmatch(numberTrailingDollarRX, "1234567890$"))
                
           
           
