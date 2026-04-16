@@ -21,3 +21,5 @@ if matchObj2 is not None:
 
 matches = ip_pattern.findall(text)
 print(matches)
+allIpAddresses = ['.'.join(tpl) for tpl in matches]
+print(allIpAddresses)
