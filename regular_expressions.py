@@ -46,7 +46,7 @@ def  mobileIsraelNumberRegex()->str:
        xxx-xx-xx
        x-xx-xx-xx
     """  
-    return r'^(\+972-(5\d)|0(5\d))-?(\d{7}|\d{3}-\d{2}-\d{2}|\d-\d{2}-\d{2}-\d{2})$'
+    return r'(\+972-(5\d)|0(5\d))-?(\d{7}|\d{3}-\d{2}-\d{2}|\d-\d{2}-\d{2}-\d{2})'
     
     
     
