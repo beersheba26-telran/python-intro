@@ -55,7 +55,8 @@ def passwordRegex ():
 def operatorRegex(): 
     return r"[+*/-]"
 def operandRegex():
-    return r"\d+"
+    numberRX: str = r"\d+(?:\.\d+)?"
+    return rf"\s*\(*\s*{numberRX}\s*\)*\s*"
 def arithmeticExprRegex():
     operandRX = operandRegex()
     operatorRx = operatorRegex()
