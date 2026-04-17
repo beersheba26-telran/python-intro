@@ -62,9 +62,9 @@ def arithmeticExprRegex():
     operatorRx = operatorRegex()
     return rf"({operandRX})(?:({operatorRx})({operandRX}))*"
 def openHtmlTagRegex():
-    return r"<[^/<>][^<>]+>"
+    return r"<[^/<>][^<>]*>"
 def closeHtmTagRegex():
-    return r"</[a-zA-Z]>"   
+    return r"</[a-zA-Z]+>"   
 def contentHtmlRegex():
     return r"[^<>]+"
 def htmlElementRegex():
