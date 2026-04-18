@@ -1,9 +1,10 @@
 import regular_expressions as regex
 from unittest import TestCase
 import re
+passwordRX:re.Pattern = re.compile(regex.passwordRegex())
 class TestRegEx(TestCase):
     def test_pythonic_name_true(self):
-        pythonicNameRX = ipV4addressRX
+        pythonicNameRX = regex.pythonicNameRegx()
         self.assertTrue(re.fullmatch(pythonicNameRX,"__"))
         self.assertTrue(re.fullmatch(pythonicNameRX,"abc"))
         self.assertTrue(re.fullmatch(pythonicNameRX,"d1"))
@@ -11,7 +12,7 @@ class TestRegEx(TestCase):
         self.assertTrue(re.fullmatch(pythonicNameRX,"_123"))
         self.assertTrue(re.fullmatch(pythonicNameRX,"B1"))
     def  test_pythonic_name_false(self): 
-        pythonicNameRX = ipV4addressRX 
+        pythonicNameRX = regex.pythonicNameRegx() 
         self.assertFalse(re.fullmatch(pythonicNameRX, " _")) 
         self.assertFalse(re.fullmatch(pythonicNameRX, "1ax")) 
         self.assertFalse(re.fullmatch(pythonicNameRX, "a-f")) 
@@ -101,7 +102,15 @@ class TestRegEx(TestCase):
         self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "+972-54123456"))
         self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "059123-45-677")) 
         self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "054-1-2-3-45-67"))
-        self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "0571-23-45-6-7"))     
+        self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "0571-23-45-6-7"))
+        self.assertFalse(re.fullmatch(mobileIsraelNumberRX, "054-1-23-4567"))  
+    def test_password_true(self):
+        self.assertTrue(passwordRX.fullmatch("12345%COm."))
+    def test_password_false(self):
+        self.assertFalse(passwordRX.fullmatch("1aA."))
+        self.assertFalse(passwordRX.fullmatch("1aA111111111"))
+        self.assertFalse(passwordRX.fullmatch("12345.Com "))
+            
              
     def test_number_trailing_dollar_true(self):
         numberTrailingDollarRX = regex.numberTrailingDollar()

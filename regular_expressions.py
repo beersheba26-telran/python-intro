@@ -30,6 +30,9 @@ def ipV4AddressRegex()->str:
     """returns regexp as match pattern of IPv4 address
        comprises of 4 octets separated by dot
        each octet contains 1-3 symbols from 0 to 255
+    """ 
+    ipOctet = ip_octet()
+    return rf"({ipOctet})\.({ipOctet})\.({ipOctet})\.({ipOctet})"
     """
     ip_1pattern = ip_octet()
     return rf'(?:{ip_1pattern})\.(?:{ip_1pattern})\.(?:{ip_1pattern})\.(?:{ip_1pattern})'
@@ -46,7 +49,8 @@ def  mobileIsraelNumberRegex()->str:
        xxx-xx-xx
        x-xx-xx-xx
     """  
-    return r'(\+972-(5\d)|0(5\d))-?(\d{7}|\d{3}-\d{2}-\d{2}|\d-\d{2}-\d{2}-\d{2})'
+    return r'(\+972-(5\d)|0(5\d))-?(\d{7}|\d{3}-\d{2}-\d{2}|\d-\d{2}-\d{2}-\d{2})'    
+    
     
 def numberTrailingDollar()->str:
     """returns regexp for number with trailing dollar sign
