@@ -12,3 +12,5 @@ operandPattern = re.compile(regular_expressions.operandRegex())
 replaced2 = operandPattern.sub("<operand>", arithmeticExpr)
 print(f'replaced operand', replaced2)
 
+operators = operandPattern.split(arithmeticExpr)
+print("operators", operators)
