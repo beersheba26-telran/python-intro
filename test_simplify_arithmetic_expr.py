@@ -34,6 +34,9 @@ class TestSimplifyArithmeticExpr(TestCase):
         self.assertTrue(checkArithmeticExpr, "12/((13-1)+(8*9))")
 
     def test_with_parentheses_false(self):
-        self.assertFalse(checkArithmeticExpr( "(1+)2"))
-        self.assertFalse(checkArithmeticExpr( "3-4(*5)"))
-        self.assertFalse(checkArithmeticExpr( "(6/7+)8"))
+        self.assertFalse(checkArithmeticExpr("(1+)2"))
+        self.assertFalse(checkArithmeticExpr("3-4(*5)"))
+        self.assertFalse(checkArithmeticExpr("(6/7+)8"))
+        self.assertFalse(checkArithmeticExpr("((1+2)"))  # нет закрывающей
+        self.assertFalse(checkArithmeticExpr(")(1+2)"))  # нарушен порядок
+        self.assertFalse(checkArithmeticExpr("(1+2))("))  # сломанный баланс
