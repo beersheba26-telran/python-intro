@@ -1,6 +1,7 @@
 import re
 import regular_expressions
 from unittest import TestCase
+from arithmetic_check import checkArithmeticExpr
 
 class TestSimplifyArithmeticExpr(TestCase):
     def test_true_cases(self):
@@ -23,3 +24,11 @@ class TestSimplifyArithmeticExpr(TestCase):
         self.assertFalse(re.fullmatch(simplifyArithmeticExprRX, "7--8"))
         self.assertFalse(re.fullmatch(simplifyArithmeticExprRX, "9**10"))
         self.assertFalse(re.fullmatch(simplifyArithmeticExprRX, "11//12"))
+
+    def test_with_parentheses(self):
+
+        self.assertTrue(checkArithmeticExpr, "(1+2)")
+        self.assertTrue(checkArithmeticExpr, "3-(4*5)")
+        self.assertTrue(checkArithmeticExpr, "(6/7)+8")
+        self.assertTrue(checkArithmeticExpr, "9*(10-11)")
+        self.assertTrue(checkArithmeticExpr, "12/(13+14)")
