@@ -25,10 +25,15 @@ class TestSimplifyArithmeticExpr(TestCase):
         self.assertFalse(re.fullmatch(simplifyArithmeticExprRX, "9**10"))
         self.assertFalse(re.fullmatch(simplifyArithmeticExprRX, "11//12"))
 
-    def test_with_parentheses(self):
-
+    def test_with_parentheses_true(self):
         self.assertTrue(checkArithmeticExpr, "(1+2)")
         self.assertTrue(checkArithmeticExpr, "3-(4*5)")
         self.assertTrue(checkArithmeticExpr, "(6/7)+8")
         self.assertTrue(checkArithmeticExpr, "9*(10-11)")
         self.assertTrue(checkArithmeticExpr, "12/(13+14)")
+        self.assertTrue(checkArithmeticExpr, "12/((13-1)+(8*9))")
+
+    def test_with_parentheses_false(self):
+        self.assertFalse(checkArithmeticExpr( "(1+)2"))
+        self.assertFalse(checkArithmeticExpr( "3-4(*5)"))
+        self.assertFalse(checkArithmeticExpr( "(6/7+)8"))
