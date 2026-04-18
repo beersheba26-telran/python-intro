@@ -1,7 +1,8 @@
 import re
 import regular_expressions
 from unittest import TestCase
-from arithmetic_check import checkArithmeticExpr
+from arithmetic_check import checkArithmeticExpr, check_parentheses
+
 
 class TestSimplifyArithmeticExpr(TestCase):
     def test_true_cases(self):
@@ -40,3 +41,18 @@ class TestSimplifyArithmeticExpr(TestCase):
         self.assertFalse(checkArithmeticExpr("((1+2)"))  # нет закрывающей
         self.assertFalse(checkArithmeticExpr(")(1+2)"))  # нарушен порядок
         self.assertFalse(checkArithmeticExpr("(1+2))("))  # сломанный баланс
+
+    def test_check_parentheses_true(self):
+        self.assertTrue(check_parentheses("()"))
+        self.assertTrue(check_parentheses("(())"))
+        self.assertTrue(check_parentheses("(()())"))
+        self.assertTrue(check_parentheses("(((())))"))
+        self.assertTrue(check_parentheses(""))
+
+    def test_check_parentheses_false(self):
+        self.assertFalse(check_parentheses("("))
+        self.assertFalse(check_parentheses(")"))
+        self.assertFalse(check_parentheses("(()"))
+        self.assertFalse(check_parentheses("())"))
+        self.assertFalse(check_parentheses(")(()"))
+        self.assertFalse(check_parentheses("(()))("))
