@@ -79,7 +79,8 @@ def operandRegex():
     """Returns regexp for operand.
        operand must be a number (integer or decimal) or a variable name (Pythonic name)
     """
-    return r'(\d+)'
+    # return r'(\d+)'  # integer
+    return r'(\d+(\.\d+)?)'  # fractional number
 
 def arithmeticRegex():
     """Returns regexp for arithmetic expression.

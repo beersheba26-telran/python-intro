@@ -9,7 +9,7 @@ class TestSimplifyArithmeticExpr(TestCase):
         self.assertTrue(re.fullmatch(simplifyArithmeticExprRX, "3-4"))
         self.assertTrue(re.fullmatch(simplifyArithmeticExprRX, "5*6"))
         self.assertTrue(re.fullmatch(simplifyArithmeticExprRX, "7/8"))
-        self.assertTrue(re.fullmatch(simplifyArithmeticExprRX, "9+10-11"))
+        self.assertTrue(re.fullmatch(simplifyArithmeticExprRX, "9+1.0-11*9/3"))
         self.assertTrue(re.fullmatch(simplifyArithmeticExprRX, "12*13/14"))
         self.assertTrue(re.fullmatch(simplifyArithmeticExprRX, "15+16*17"))
 
