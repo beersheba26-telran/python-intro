@@ -33,9 +33,6 @@ def ipV4AddressRegex()->str:
     """ 
     ipOctet = ip_octet()
     return rf"({ipOctet})\.({ipOctet})\.({ipOctet})\.({ipOctet})"
-    """
-    ip_1pattern = ip_octet()
-    return rf'(?:{ip_1pattern})\.(?:{ip_1pattern})\.(?:{ip_1pattern})\.(?:{ip_1pattern})'
     # return rf'(?:{ip_1pattern}\.){{3}}(?:{ip_1pattern})'
 
 def  mobileIsraelNumberRegex()->str:
