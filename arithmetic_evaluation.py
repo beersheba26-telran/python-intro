@@ -27,6 +27,11 @@ def __binEval(op1: float, op2: float, operation: str)->float:
     except KeyError as e:
         raise ValueError(f"operation {operation} not implemented yet")
 def __getExprWithNoMulDiv(expr: str)->str: 
+    '''
+    returns original expression but with no multiplication and division operations
+    sequential in line loop sustitution of mulDivExpPattern with results of single multiplication/division operations
+    '''
+    
     while mo:=mulDivExpPattern.search(expr):
         op1: float = float(mo.group(1))
         op2: float = float(mo.group(3))
@@ -34,15 +39,13 @@ def __getExprWithNoMulDiv(expr: str)->str:
         value: float = __binEval(op1, op2 , operation)
         expr = expr[:mo.start()] + str(value) + expr[mo.end():] 
     return expr    
-def evaluation(expr: str)->float:
+def __evaluationNoParntheses(expr: str)->float:
    '''
-   evaluation arithmetic expression with assumption:
+   evaluation arithmetic expression with :
    no parentheses
    '''
    
-   if not checkArithmeticExpr(expr):
-       raise ValueError(f"syntax error in expression {expr}")
-   expr = re.sub("\s+","",expr) #removing white symbols
+  
    expr = __getExprWithNoMulDiv(expr)
    operands: list[str] = __getOperands(expr)
    operators: list[str] = __getOperators(expr) #first operator is empty string
@@ -50,3 +53,13 @@ def evaluation(expr: str)->float:
    for ind in range(1, len(operands)):
        result = __binEval(result, float(operands[ind]), operators[ind])
    return result   
+def __getExprWithNoParentheses(expr: str) -> float:
+    pass
+    #TODO
+def evaluation(expr: str)->float:
+    if not checkArithmeticExpr(expr):
+       raise ValueError(f"syntax error in expression {expr}")
+    expr = re.sub("\s+","",expr) #removing white symbols
+    expr = __getExprWithNoParentheses(expr)
+    return __evaluationNoParntheses(expr)
+    
