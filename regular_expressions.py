@@ -76,21 +76,21 @@ def operatorRegex()->str:
     return r'[+\-*/]'
 
 def operandRegex():
-    """Returns regexp for operand.
-       operand must be a number (integer or decimal) or a variable name (Pythonic name)
-    """
-    # return r'(\d+)'  # integer
-    # return r'(\d+(\.\d+)?)'  # fractional number
-    return r'(?:\d+(?:\.\d+)?|X)' # fractional number or X
-
-def arithmeticRegex():
-    """Returns regexp for arithmetic expression. NO PARENTHESES!
-       arithmetic expression must be in the form: operand operator operand
-       where operand is a number (integer or decimal) or a variable name (Pythonic name)
-       and operator is one of the following: +, -, *, /
-    """
-    return rf'{operandRegex()}\s*(?:{operatorRegex()}\s*{operandRegex()})*'
-
-def arithmeticRegexParenthereses():
-    ar = arithmeticRegex()
-    return rf'\(\s*({ar})\s*\)'
+    numberRX: str = r"\d+(?:\.\d+)?"
+    return rf"\s*(?:\(*\s*)*{numberRX}\s*(?:\)*\s*)*"
+def arithmeticExprRegex():
+    operandRX = operandRegex()
+    operatorRx = operatorRegex()
+    return rf"({operandRX})(?:({operatorRx})({operandRX}))*"
+def openHtmlTagRegex():
+    return r"<[^/<>][^<>]*>"
+def closeHtmTagRegex():
+    return r"</[a-zA-Z]+>"   
+def contentHtmlRegex():
+    return r"[^<>]+"
+def htmlElementRegex():
+    openTagRX = openHtmlTagRegex()
+    closeTagRX = closeHtmTagRegex()
+    contentRX = contentHtmlRegex()
+    return rf"({openTagRX})({contentRX})({closeTagRX})"
+    

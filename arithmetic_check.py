@@ -14,6 +14,8 @@ def check_parentheses(s: str) -> bool:
     return balance == 0
 
 
+arithmeticExprPattern: re.Pattern = re.compile(regular_expressions.arithmeticExprRegex())
+
 def checkArithmeticExpr(arithmeticExpr:str)->bool:
     '''
     arithemetic expression may contain parenthesses and spaces
@@ -22,23 +24,20 @@ def checkArithmeticExpr(arithmeticExpr:str)->bool:
     check using regular expression (updated from the CW session)
     check pairness of the parenthesses (no regular expression), like (()) - valid, (() -invalid
     '''
-
-
-    if not check_parentheses(arithmeticExpr):
-        return False
-
-    def reduce_parens(s: str) -> str:
-        paren_E = re.compile(arithmeticRegexParenthereses())
-        while True:
-            new_s, n = paren_E.subn('X', s)
-            if n == 0:
-                return s
-            s = new_s
-
-    no_paren = arithmeticRegex()
-
-    def is_valid(s: str) -> bool:
-        s2 = reduce_parens(s)
-        return re.fullmatch(rf'{no_paren}', s2) is not None
-
-    return is_valid(arithmeticExpr)
+    res: bool = False
+    if arithmeticExprPattern.fullmatch(arithmeticExpr):
+        try:
+            __checkPairness(arithmeticExpr)
+            res = True
+        except:
+            pass    
+    return res   
+def __checkPairness(expr:str):
+    count: int = 0
+    for ch in expr:
+        if ch == "(":
+            count += 1
+        elif ch == ")":
+            count -= 1
+        if count < 0: raise Exception() 
+    if count != 0: raise Exception() 
