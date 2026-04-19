@@ -7,7 +7,9 @@ operandsDelimPattern: re.Pattern = re.compile(regular_expressions.operatorRegex(
 operatorsDelimPattern: re.Pattern = re.compile(regular_expressions.numberRegex())
 ops: dict = {
     "+": operator.add,
-    "-": operator.sub
+    "-": operator.sub,
+    "*": operator.mul,
+    "/": operator.truediv
 }
 def __getOperands(expr: str):
    return operandsDelimPattern.split(expr)
