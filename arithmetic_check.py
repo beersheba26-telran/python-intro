@@ -1,5 +1,19 @@
 import re
-import regular_expressions
+from regular_expressions import arithmeticRegex, arithmeticRegexParenthereses
+
+
+def check_parentheses(s: str) -> bool:
+    balance = 0
+    for ch in s:
+        if ch == '(':
+            balance += 1
+        elif ch == ')':
+            balance -= 1
+            if balance < 0:
+                return False
+    return balance == 0
+
+
 arithmeticExprPattern: re.Pattern = re.compile(regular_expressions.arithmeticExprRegex())
 
 def checkArithmeticExpr(arithmeticExpr:str)->bool:

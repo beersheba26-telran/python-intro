@@ -1,11 +1,25 @@
 import re
 import regular_expressions
-arithmeticExpr:str = "10+40-90*2/4"
-operatorPattern: re.Pattern = re.compile(regular_expressions.operatorRegex())
-operandPattern: re.Pattern = re.compile(regular_expressions.operandRegex())
-replaced:str = operatorPattern.sub("<operator>",arithmeticExpr)
-print(f"initial text is {arithmeticExpr}; replaced is {replaced}")
-replaced = operandPattern.sub("<operand>", arithmeticExpr)
-print(f"initial text is {arithmeticExpr}; replaced is {replaced}")
-operators: list[str] = operandPattern.split(arithmeticExpr)
-print("operators ", operators)
+
+text: str = '''
+Service is running on the server with public ip 54.10.8.33, DB server has private IP 172.10.15.20.
+DB Backup server has private IP 172.10.30.40 .
+Watch-dog monitoring server has private IP 172.10.88.15.
+'''
+
+
+ip_pattern = re.compile(regular_expressions.ipV4AddressRegex())
+matchObj = ip_pattern.search(text)
+while matchObj is not None:
+    print(matchObj.group())
+    matchObj = ip_pattern.search(text, matchObj.end())
+
+backupIndex = text.index("Backup")
+matchObj2 = ip_pattern.search(text, backupIndex)
+if matchObj2 is not None:
+    print(f"DB Backup server IP is: {matchObj2.group()}")
+
+matches = ip_pattern.findall(text)
+print(matches)
+allIpAddresses = ['.'.join(tpl) for tpl in matches]
+print(allIpAddresses)
