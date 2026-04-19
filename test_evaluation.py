@@ -22,3 +22,19 @@ class TestEvaluation(unittest.TestCase):
         ]
         for input, expected in values:
             self.assertEqual(evaluateArithmeticExpr(input), expected)
+
+
+    def test_invalid(self):
+        invalid = [
+            '1+',
+            '+1',
+            '1++2',
+            '1*/2',
+            '(1+2',
+            '1+2)',
+            '(1+)',
+            '()*3',
+        ]
+        for expr in invalid:
+            with self.assertRaises(ValueError):
+                evaluateArithmeticExpr(expr)
