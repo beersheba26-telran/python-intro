@@ -14,8 +14,8 @@ class TestArithmeticNMulDivNoParenthesesEval(TestCase):
         expr: str = "2.23 +4 / 3.12 * 10 / 2* 100.54 -20 +40" 
         self.assertAlmostEqual(2.23 +4 / 3.12 * 10 / 2* 100.54 -20 +40, evaluation(expr), places=2)
     def test_right_full_expr(self):
-         expr: str = "((2.23 +4) / 3.12) * (10 / 2)* 100.54 -(20 +40)"  
-         self.assertAlmostEqual(((2.23 +4) / 3.12) * (10 / 2)* 100.54 -(20 +40), evaluation(expr), places=2)     
+         expr: str = "((2.23 +4) / 3.12) * (10 / 2)* 100.54 -(20 -40) + (40 -20)"  
+         self.assertAlmostEqual(((2.23 +4) / 3.12) * (10 / 2)* 100.54 -(20 -40)+ (40 -20), evaluation(expr), places=2)     
     def test_wrong_expr(self):
         with self.assertRaises(ValueError):
             evaluation("2,23 + 20")
