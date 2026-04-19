@@ -13,6 +13,7 @@ def check_parentheses(s: str) -> bool:
             if balance < 0:
                 return False
     return balance == 0
+
 def evaluateArithmeticExpr(arithmeticExpr: str) -> float:
     if not check_parentheses(arithmeticExpr):
         raise ValueError("Invalid expression")
