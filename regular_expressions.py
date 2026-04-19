@@ -56,7 +56,7 @@ def operatorRegex():
     return r"[+*/-]"
 def operandRegex():
     numberRX: str = r"\d+(?:\.\d+)?"
-    return rf"\s*\(*\s*{numberRX}\s*\)*\s*"
+    return rf"\s*(?:\(*\s*)*{numberRX}\s*(?:\)*\s*)*"
 def arithmeticExprRegex():
     operandRX = operandRegex()
     operatorRx = operatorRegex()
