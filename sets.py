@@ -11,5 +11,11 @@ def max_negative_representive(lst: list[int]) -> int:
     if no one with negative representive, returns -1
     Algorithm complexity O[N]
     '''
-    
+    helper = set()
+    res = -1
+    for num in lst:
+        if -num in helper:
+            res = max(res, abs(num))
+        else: helper.add(num) 
+    return res       
     
