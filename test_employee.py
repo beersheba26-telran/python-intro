@@ -1,5 +1,5 @@
 from unittest import TestCase
-from Employee import Employee
+from employee import Employee
 import json
 from dataclasses import asdict
 class TestEmployee(TestCase):
