@@ -1,23 +1,11 @@
-import json
+from dataclasses import dataclass, field
+@dataclass(order=True, frozen=True)
 class Employee:
     id: str
-    name: str
-    birthdate: str
-    department: str
-    salary: int
-    def __init__(self,*,id:str,name:str,birthdate:str,department:str, salary:int):
-        self.id = id
-        self.birthdate = birthdate
-        self.department = department
-        self.name = name
-        self.salary = salary
-    def __eq__(self, other)->bool:
-        return self.id == other.id if isinstance(other, Employee) else NotImplemented
-    def __lt__(self, other)->bool:
-        return self.id < other.id if isinstance(other, Employee) else NotImplemented
-    def __str__(self)->str:
-        return json.dumps(self.__dict__)
-        
-            
-
+    name: str = field(compare=False)
+    birthdate: str = field(compare=False)
+    department: str = field(compare=False)
+    salary: int = field(compare=False)
+   
+   
    
