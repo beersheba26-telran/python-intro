@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-@dataclass(order=True, frozen=True)
+@dataclass(order=True, frozen=True, slots=True)
 class Employee:
     id: str
     name: str = field(compare=False)

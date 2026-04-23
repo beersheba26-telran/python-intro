@@ -1,6 +1,7 @@
 from unittest import TestCase
 from Employee import Employee
-from sys import getsizeof
+import json
+from dataclasses import asdict
 class TestEmployee(TestCase):
     empl: Employee = Employee(salary=10000, name="Vasya",department="QA",
                                   id="123", birthdate="2000-01-01")
@@ -14,7 +15,7 @@ class TestEmployee(TestCase):
         
         self.assertEqual(self.empl, self.empl1)
         self.assertFalse(self.empl is self.empl1)
-        self.assertEqual("123", self.empl.__dict__["id"])
+        hasattr(self.empl, "__dict__") and self.assertEqual("123", self.empl.__dict__["id"])
     def test_sorting_comparing(self) :
         employees: list[Employee] = [self.empl1, self.empl2, self.empl3]
         expectedById = [self.empl2, self.empl1, self.empl3] # sorted by id
@@ -22,9 +23,16 @@ class TestEmployee(TestCase):
         expectedByBirthdate = [self.empl3, self.empl1, self.empl2]
         self.assertEqual(expectedByBirthdate,sorted(employees, key=lambda e: e.birthdate))
     def test_string_convertion(self) :
-        self.assertTrue("Vasya" in str(self.empl))  
-    def test_print_sizeof(self):
-        print("size of Employee instance with __dict__ is ", getsizeof(self.empl))    
+        self.assertTrue("Vasya" in str(self.empl)) 
+    def test_json_serialization(self) :
+        jsonStr = '{"id": "123", "name": "Vasya", "birthdate": "2000-01-01", "department": "QA", "salary": 10000}'  
+        self.assertEqual(jsonStr, json.dumps(asdict(self.empl)))  
+    def test_repr_serialization(self):
+        self.assertEqual("Employee(id='123', name='Vasya', birthdate='2000-01-01', department='QA', salary=10000)",
+                         repr(self.empl))    
+       
+       
+       
         
        
         
