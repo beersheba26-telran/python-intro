@@ -1,5 +1,6 @@
 from unittest import TestCase
 from Employee import Employee
+from sys import getsizeof
 class TestEmployee(TestCase):
     empl: Employee = Employee(salary=10000, name="Vasya",department="QA",
                                   id="123", birthdate="2000-01-01")
@@ -21,7 +22,9 @@ class TestEmployee(TestCase):
         expectedByBirthdate = [self.empl3, self.empl1, self.empl2]
         self.assertEqual(expectedByBirthdate,sorted(employees, key=lambda e: e.birthdate))
     def test_string_convertion(self) :
-        self.assertTrue("Vasya" in str(self.empl))   
+        self.assertTrue("Vasya" in str(self.empl))  
+    def test_print_sizeof(self):
+        print("size of Employee instance with __dict__ is ", getsizeof(self.empl))    
         
        
         
