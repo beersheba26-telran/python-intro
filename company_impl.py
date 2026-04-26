@@ -6,13 +6,13 @@ from company_exceptions import EmployeeAlreadyExists, EmployeeNotFoundError
 from typing import Callable
 class __CompanyImpl(Company):
     employees: dict[str, Employee] = dict() # key - id, value - Employee
-    employeesDepartment: dict[str, list[Employee]] = dict() # key - department, value - list of employees in department
+    employeesDepartment: dict[str, set[Employee]] = dict() # key - department, value - list of employees in department
     
     def hireEmployee(self, empl):
         if empl.id in self.employees: 
             raise EmployeeAlreadyExists(empl.id)
         self.employees[empl.id] = empl
-        self.employeesDepartment.setdefault(empl.department, []).append(empl)
+        self.employeesDepartment.setdefault(empl.department, set()).add(empl)
     def fireEmployee(self, id):
         if id not in self.employees:
             raise EmployeeNotFoundError(id)
@@ -22,7 +22,7 @@ class __CompanyImpl(Company):
 
     def __remove_employee_from_dep_index(self, emplRes):
         employeesInDepartment = self.employeesDepartment.get(emplRes.department)
-        employeesInDepartment.remove(emplRes)
+        employeesInDepartment.discard(emplRes)
         if not len(employeesInDepartment):
             self.employeesDepartment.pop(emplRes.department)
     def getAllEmployees(self):
