@@ -1,8 +1,8 @@
-from sortedcontainers import SortedList
-sortedList: SortedList = SortedList([10, 20, 30, 20, 40,  20])
-print(sortedList) # printing out whole list in sorted order
-print(sortedList[sortedList.bisect_left(20):sortedList.bisect_right(20)])# printing out all 20
-sortedList.remove(20)# removing one 20
-del sortedList[sortedList.bisect_left(20):sortedList.bisect_right(20)] #removing all 20
-print(sortedList[sortedList.bisect_left(20):sortedList.bisect_right(20)])# printing out all 20
+from sortedcontainers import SortedList, SortedKeyList
+sortedList: SortedList = SortedList(["Apple", "apple", "Apricot"])
+print(sortedList) # SortedList(['Apple', 'Apricot', 'apple'])
+#no possibility apply case insensitive comparing for SortedList, but only for SortedKeyList
+sortedKeyList: SortedKeyList = SortedKeyList(["Apple", "apple", "Apricot"], key= str.lower)
+print([s for s in sortedKeyList]) # ['Apple', 'apple', 'Apricot']
+
 
