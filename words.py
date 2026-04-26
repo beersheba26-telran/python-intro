@@ -1,6 +1,6 @@
 class Words: 
     #TODO
-    def addWord(word:str):
+    def addWord(self, word:str):
         '''
         adds new word
         throw ValueError in the case word exists
@@ -8,7 +8,7 @@ class Words:
         
         '''
         #TODO
-    def wordsStratsWith(prefix: str)->list[str]:
+    def wordsStratsWith(self, prefix: str)->list[str]:
         '''
         returns all words beginning from the given prefix
         '''
