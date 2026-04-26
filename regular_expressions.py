@@ -23,7 +23,9 @@ def ip_octet():
     '''
     return matching pattern for IP octet (number with optional leading zeros from 0 to 255)
     '''
-    return r"\d{1,2}|[01]\d\d|2[0-4]\d|25[0-5]"
+    return r"(\d{1,2}|[01]\d\d|2[0-4]\d|25[0-5])"
+    # return r"(?:\d{1,2}|[01]\d\d|2[0-4]\d|25[0-5])"
+
 def ipV4AddressRegex()->str:
     """returns regexp as match pattern of IPv4 address
        comprises of 4 octets separated by dot
@@ -31,10 +33,12 @@ def ipV4AddressRegex()->str:
     """ 
     ipOctet = ip_octet()
     return rf"({ipOctet})\.({ipOctet})\.({ipOctet})\.({ipOctet})"
+    # return rf'(?:{ip_1pattern}\.){{3}}(?:{ip_1pattern})'
+
 def  mobileIsraelNumberRegex()->str:
     """returns regexp for mobile phone Israel number
-       +972- - Israel preffix (not mandatary)
-       Operator preffix 0 (only without +972-)
+       +972- - Israel prefix (not mandatary)
+       Operator prefix 0 (only without +972-)
        50,51, 52, 53, 54, 55, 56, 57,58, 59
        optional dash
        7 digits as follows
@@ -42,34 +46,51 @@ def  mobileIsraelNumberRegex()->str:
        xxx-xx-xx
        x-xx-xx-xx
     """  
-    return r"(\+972-?|0)5\d-?(\d{7}|\d{3}-\d{2}-\d{2}|\d-\d{2}-\d{2}-\d{2})"   
-def passwordRegex ():
-    '''
-    At least one uppercase letter,
-    At least one lowercase letter,
-    At least one digit,
-    At least one symbol from @#$%&*!?.-
-    At least 8 symbols
-    '''
-    return r"(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%&*!?.-])[\w@#$%&*!?.-]{8,}"
-def operatorRegex(): 
-    return r"[+*/-]"
-def operandRegex():
-    numberRX: str = r"\d+(?:\.\d+)?"
-    return rf"\s*(?:\(*\s*)*{numberRX}\s*(?:\)*\s*)*"
-def arithmeticExprRegex():
-    operandRX = operandRegex()
-    operatorRx = operatorRegex()
-    return rf"({operandRX})(?:({operatorRx})({operandRX}))*"
-def openHtmlTagRegex():
-    return r"<[^/<>][^<>]*>"
-def closeHtmTagRegex():
-    return r"</[a-zA-Z]+>"   
-def contentHtmlRegex():
-    return r"[^<>]+"
-def htmlElementRegex():
-    openTagRX = openHtmlTagRegex()
-    closeTagRX = closeHtmTagRegex()
-    contentRX = contentHtmlRegex()
-    return rf"({openTagRX})({contentRX})({closeTagRX})"
+    return r'(\+972-(5\d)|0(5\d))-?(\d{7}|\d{3}-\d{2}-\d{2}|\d-\d{2}-\d{2}-\d{2})'    
     
+    
+def numberTrailingDollar()->str:
+    """returns regexp for number with trailing dollar sign
+       number may contain digits and optional dot as decimal separator
+       dot cannot be first symbol
+       dot cannot be last symbol
+       dot cannot be followed by another dot
+    """
+    return r"\d+(?:\.\d+)?\$"
+
+def passwordRegex()->str:
+    """Returns regexp for password.
+       password must be at least 8 characters long
+       password must contain at least one uppercase letter
+       password must contain at least one lowercase letter
+       password must contain at least one digit
+       password must contain at least one special character from the set !@#$%^&*()
+    """
+    # return r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$'
+    return "(?=.([A-Z])(?=.([A-Z])"
+
+def operatorRegex()->str:
+    """Returns regexp for operator.
+       operator must be one of the following: +, -, *, /
+    """
+    return r'[+\-*/]'
+
+def operandRegex():
+    """Returns regexp for operand.
+       operand must be a number (integer or decimal) or a variable name (Pythonic name)
+    """
+    # return r'(\d+)'  # integer
+    # return r'(\d+(\.\d+)?)'  # fractional number
+    return r'(?:\d+(?:\.\d+)?|X)' # fractional number or X
+
+def arithmeticRegex():
+    """Returns regexp for arithmetic expression. NO PARENTHESES!
+       arithmetic expression must be in the form: operand operator operand
+       where operand is a number (integer or decimal) or a variable name (Pythonic name)
+       and operator is one of the following: +, -, *, /
+    """
+    return rf'{operandRegex()}\s*(?:{operatorRegex()}\s*{operandRegex()})*'
+
+def arithmeticRegexParenthereses():
+    ar = arithmeticRegex()
+    return rf'\(\s*({ar})\s*\)'

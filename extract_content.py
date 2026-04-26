@@ -9,9 +9,14 @@ def extractHtmlContent(htmlText:str, tag:str = None)->list[str]:
     extractHtmlContent(html, "span") -> ['ssss', 'any text']
      extractHtmlContent(html) -> ['hhhh','ssss', 'any text']
     '''
-    htmlContents = [mo.group(2) for mo in htmlElemPattern.finditer(htmlText) if not tag or tag in mo.group(1) ]
-    
-    return htmlContents
-if __name__ == "__main__":
-        
-   extractHtmlContent("<p>hhhh</p> <span>ssss</span> <span>any text</span>") 
+    pattern = htmlElementRegex()
+    results = []
+
+    for match in re.finditer(pattern, htmlText):
+        found_tag = match.group(1)
+        content = match.group(3)
+
+        if tag is None or tag == found_tag:
+            results.append(content)
+
+    return results
