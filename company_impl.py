@@ -5,7 +5,6 @@ from sortedcontainers import SortedKeyList, SortedSet
 from company import Company
 from employee import Employee
 from company_exceptions import EmployeeAlreadyExists, EmployeeNotFoundError
-from typing import Callable
 class __CompanyImpl(Company):
     employees: dict[str, Employee] # key - id, value - Employee
     employeesDepartment: dict[str, set[Employee]] # key - department, value - list of employees in department
@@ -50,11 +49,11 @@ class __CompanyImpl(Company):
         dateMin = _getDateFromAge(toAge, 1, 1)
         dateMax = _getDateFromAge(fromAge, 12, 31)
         left: int = self.employeesAge.bisect_key_left((dateMin,""))
-        right: int = self.employeesAge.bisect_key_left((dateMax+"0", chr(0x10ffff)))
+        right: int = self.employeesAge.bisect_key_left((dateMax+"0", ""))
         return self.employeesAge[left:right]
     def getEmployeesBySalary(self, fromSalary, toSalary):
         left: int = self.employeesSalary.bisect_key_left((fromSalary,""))
-        right: int = self.employeesSalary.bisect_key_left((toSalary+1, chr(0x10ffff)))
+        right: int = self.employeesSalary.bisect_key_left((toSalary+1, ""))
         return self.employeesSalary[left:right]
 def _getDateFromAge(age:int, month, day)->str:
     today = date.today()
