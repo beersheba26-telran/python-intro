@@ -48,7 +48,18 @@ class TestRandomNumbers(TestCase):
             numbers =set(randomNumbers)    
             self.assertEqual(30, len(numbers))  
             for num in  numbers:
-                self.assertTrue(num % 2)             
+                self.assertTrue(num % 2) 
+    def test_repeated_iterable_iterations(self):
+        randomNumbers = RandomIntegerNumbers(min=10, max=20, amount=100)
+        self.assertEqual(100, len([num for num in randomNumbers]))
+        self.assertEqual(100, len([num for num in randomNumbers]))
+    def test_atempts(self): 
+        randomNumbers = RandomIntegerNumbers(10, 20, amount=7, isdistinct=True, predicate=lambda n: n%2)  
+        with self.assertRaises(ValueError):
+            set(randomNumbers)
+        
+        
+                            
             
                    
             
